@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html >
+<head>
+   <link rel="stylesheet" href="task4 style.css">
+    <title>QR Code Scanner </title>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+   </head>
+
+<body>
+    <h2>QR Code Scanner & Generator</h2>
+    <div id="qr-reader"></div>
+    <p id="qr-result">Scan a QR Code</p>
+    <input type="text" id="qr-text" placeholder="Enter text to generate QR" />
+    <button onclick="generateQR()">Generate QR</button>
+    <div id="loading" class="loading">Generating QR Code...</div>
+    <div id="qr-code"></div>
+    <div id="download-btn-wrapper">
+        <button id="download-btn" onclick="downloadQR()">Download QR Code</button>
+    </div>
+
+    <script>
+        function startQRScanner() {
+            const qrScanner = new Html5QrcodeScanner(
+                "qr-reader", {
+                    fps: 10,
+                    qrbox: 250
+                });
+
+            qrScanner.render(
+                (decodedText) => {
+                    document.getElementById("qr-result").innerText = "Scanned: " + decodedText;
+                    qrScanner.clear();
+                },
+                (errorMessage) => {
+                    console.log(errorMessage);
+                });
+        }
+        startQRScanner();
+        function generateQR() {
+            let qrText = document.getElementById("qr-text").value;
+            if (qrText.trim() === "") {
+                alert("Enter text to generate QR Code");
+                return;
+            }
+            document.getElementById("loading").style.display = "block";
+            document.getElementById("qr-code").innerHTML = "";
+            let qr = new QRCode(document.getElementById("qr-code"), {
+                text: qrText,
+                width: 200,
+                height: 200
+            });
+            setTimeout(function () {
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("qr-code").style.display = "inline-block";
+                document.getElementById("download-btn").style.display = "block";
+            }, 1000);
+        }
+        function downloadQR() {
+            let qrCanvas = document.querySelector("#qr-code canvas");
+            let qrImage = qrCanvas.toDataURL("image/png");
+
+            let link = document.createElement("a");
+            link.href = qrImage;
+            link.download = "qr-code.png";
+            link.click();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+* {
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #121212;
+        color: white;
+        margin: 0.5px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+           
+    }
+
+    h2 {
+        margin-top: 20px;
+        color: cyan;
+    }
+
+    #qr-reader {
+        width: 300px;
+        max-width: 400px;
+        margin: auto;
+        background-color:rgb(173, 19, 220);
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    #qr-result {
+        margin-top: 10px;
+    }
+
+    #qr-code {
+        margin-top: 20px;
+        padding: 20px;
+        display: inline-block;
+        border-radius: 10px;
+        box-shadow: 0 0 15px 5px rgba(0, 255, 255, 0.7);
+        transition: box-shadow 0.3s ease-in-out;
+        background-color: white;
+        display: none;
+    }
+
+    #qr-code:hover {
+        box-shadow: 0 0 25px 10px rgba(0, 255, 255, 1);
+    }
+
+    input,
+    button {
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        border: none;
+        font-size: 16px;
+    }
+
+    button {
+        cursor: pointer;
+        background: cyan;
+        color: black;
+        font-weight: bold;
+    }
+
+    #download-btn {
+        display: block;
+        margin-top: 20px;
+        background: lime;
+        
+    }
+
+    .loading {
+        display: none;
+        font-size: 18px;
+        color: cyan;
+    }
+}  
